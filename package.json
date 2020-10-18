@@ -1,0 +1,33 @@
+{
+  "name": "scraping",
+  "version": "1.0.0",
+  "description": "Scrape data",
+  "main": "app.js",
+  "repository": "https://github.com/suhaibaffan/scraping.git",
+  "author": "Suhaib Affan <suhaibaffan91@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn node -r @babel/register src/app.js",
+    "start:production": "node build/app.js",
+    "prebuild": "rm -rf build && mkdir build",
+    "build": "babel src --out-dir build"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "chalk": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-function-bind": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "babel-eslint": "^v11.0.0-beta.0",
+    "babel-plugin-inline-import": "^3.0.0"
+  }
+}
