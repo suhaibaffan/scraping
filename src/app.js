@@ -80,7 +80,7 @@ async function main () {
     console.log( chalk.yellowBright( `Connecting to db: ${chalk.red(dbHost)}` ) );
     spinner.start();
     const dbConnection = await connectToDb({ host: dbHost, database: dbName, user: dbUserName, password: dbPassword });
-    
+
     spinner.stop( true );
     console.log( chalk.green( 'Connected to db' ) );
     prompts.complete();
