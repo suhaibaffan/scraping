@@ -1,7 +1,8 @@
 import puppeteer from 'puppeteer';
 import { warning, info } from './log';
+import { saveScrap } from './db';
 
-export default async function scrape ( args ) {
+export default async function scrape ( conn ) {
     const browser = await puppeteer.launch({
         headless: false
     });
@@ -47,7 +48,12 @@ export default async function scrape ( args ) {
         return Array.from(columns, column => column.innerText);
         });
     });
+    // remove empty values
+    const processedData = result.filter( item => item.length > 0 );
     // To do save result.
+    const savedData = await saveScrap( processedData, conn );
+    console.log( savedData );
+    conn.destroy();
 
     await page.screenshot({ path: 'finalimage.png' });
     warning('completed');

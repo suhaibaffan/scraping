@@ -4,6 +4,8 @@ import * as Rx from 'rxjs';
 const Spinner = require( 'cli-spinner' ).Spinner;
 import {connectToDb} from './db';
 import { runScript } from './api';
+import scrape from './scrape';
+import { info, error, warning } from './log';
 
 const spinner = new Spinner({
     text: '',
@@ -77,17 +79,26 @@ async function main () {
         throw new Error( 'Password required to connect with the db.' );
     }
 
-    console.log( chalk.yellowBright( `Connecting to db: ${chalk.red(dbHost)}` ) );
+    info( `Connecting to db: ${dbHost}` );
     spinner.start();
     const dbConnection = await connectToDb({ host: dbHost, database: dbName, user: dbUserName, password: dbPassword });
 
     spinner.stop( true );
-    console.log( chalk.green( 'Connected to db' ) );
-    prompts.complete();
+    info( 'Connected to db' );
 
     if ( selectedChoice === 'api' ) {
         await runScript( dbConnection );
-    }
-}
+        process.exit( 0 );
+    } else if ( selectedChoice === 'view data' ) {
 
+    } else {
+        await scrape( dbConnection );
+    }
+    prompts.complete();
+}
 main();
+
+process.on('SIGINT', function() {
+    spinner.stop( true );
+    console.log('Bye bye.');
+});
