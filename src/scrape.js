@@ -37,10 +37,8 @@ export default async function scrape ( conn ) {
     await page.click( 'button.applyBtn.btn.btn-sm.btn-success' );
     info( 'Submitted custom date.' );
     await page.waitFor( 10000 );
-    await page.screenshot({ path: 'date.png' });
     await page.select( "select[name=DataTables_Table_0_length]", "-1");
     info( 'All dropdown option selected' );
-    await page.screenshot({ path: 'image.png' });
     await page.waitFor(10000)
     const result = await page.$$eval('#DataTables_Table_0 tr', rows => {
         return Array.from(rows, row => {
@@ -54,8 +52,6 @@ export default async function scrape ( conn ) {
     const savedData = await saveScrap( processedData, conn );
     console.log( savedData );
     conn.destroy();
-
-    await page.screenshot({ path: 'finalimage.png' });
     warning('completed');
     browser.close();
 }

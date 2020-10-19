@@ -93,9 +93,22 @@ export function saveScrap( scraps, conn ) {
 }
 
 export function getUsers  ( conn ) {
-    return  newPromise( ( resolve, reject ) => {
+    return  new Promise( ( resolve, reject ) => {
         conn.query( 
             'SELECT * FROM users'
+        , ( err, result ) => {
+            if ( err ) {
+                reject( err );
+            }
+            resolve( result );
+        });
+    });
+}
+
+export function getScraps  ( conn ) {
+    return  new Promise( ( resolve, reject ) => {
+        conn.query( 
+            'SELECT * FROM scraps'
         , ( err, result ) => {
             if ( err ) {
                 reject( err );
