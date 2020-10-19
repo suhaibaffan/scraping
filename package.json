@@ -18,6 +18,7 @@
     "cli-spinner": "^0.2.10",
     "inquirer": "^7.3.3",
     "mysql": "^2.18.1",
+    "puppeteer": "^5.3.1",
     "rxjs": "^6.6.3"
   },
   "devDependencies": {

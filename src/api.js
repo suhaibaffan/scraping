@@ -9,4 +9,5 @@ export async function runScript( dbConnection ) {
 
     await saveUsers( [...page1Data.data, ...page2Data.data ], dbConnection );
     info( 'Script completed.' );
+    dbConnection.destroy();
 }
